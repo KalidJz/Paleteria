@@ -1,0 +1,552 @@
+# We need to create an index.html file that exact recreates the digital menu design on TV.
+# Let's write the HTML file with high quality CSS, SVG illustrations / exact styled popsicles that match the image precisely.
+# We will use pure CSS / SVG for the popsicles so they look EXACTLY like real mexican paletas (with stick, texture, seeds, chunks, strawberry slices, sprinkles, chocolate coating, etc.), no broken links or unrelated photos.
+
+html_code = """<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Paletería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cyan-bg: #82e3e6;
+      --yellow-bg: #fde047;
+      --agua-blue: #0284c7;
+      --leche-pink: #ec4899;
+      --esquinales-orange: #ea580c;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: #87e5e8;
+      background-image: 
+        radial-gradient(circle at 100% 0%, #fde047 0%, #fde047 42%, transparent 43%),
+        radial-gradient(circle at 50% 120%, #fef08a 0%, transparent 35%);
+      display: grid;
+      grid-template-columns: 1.15fr 1.6fr 1.15fr;
+      gap: 16px;
+      padding: 16px 20px;
+    }
+
+    /* COLUMNA 1 */
+    .col-1 {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .brand-header {
+      background: white;
+      border-radius: 20px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .brand-logo-icon {
+      width: 44px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0369a1;
+      letter-spacing: 1.5px;
+      line-height: 1;
+    }
+
+    /* CONTENEDORES DE SECCIÓN */
+    .menu-panel {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      flex: 1;
+    }
+
+    .panel-header {
+      border-radius: 16px;
+      padding: 8px 14px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .panel-header.agua { background: var(--agua-blue); }
+    .panel-header.leche { background: var(--leche-pink); }
+    .panel-header.esquinales { background: var(--esquinales-orange); }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-icon {
+      width: 22px;
+      height: 28px;
+    }
+
+    .header-price-badge {
+      background: white;
+      padding: 2px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 1.25rem;
+    }
+
+    .panel-header.agua .header-price-badge { color: var(--agua-blue); }
+    .panel-header.leche .header-price-badge { color: var(--leche-pink); }
+    .panel-header.esquinales .header-price-badge { color: var(--esquinales-orange); }
+
+    /* GRILLAS */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .grid-3x2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    /* TARJETA DE PALETA */
+    .paleta-card {
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      background: white;
+    }
+
+    .paleta-visual {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+
+    /* FONDOS PASTEL EXACTOS */
+    .bg-picafresa { background: #ff7675; }
+    .bg-arroz     { background: #fbe3b5; }
+    .bg-cacahuate { background: #f3c292; }
+    .bg-pina      { background: #ffeaa7; }
+
+    .bg-chocoreta { background: #a8e6cf; }
+    .bg-cajeta    { background: #e8a87c; }
+    .bg-zarzamora { background: #d88ab2; }
+    .bg-fresacrema{ background: #ffb8b8; }
+    .bg-pistache  { background: #c7e9b0; }
+    .bg-nutella   { background: #bca08d; }
+
+    .bg-presasnuez { background: #fed7aa; }
+    .bg-fresasprep { background: #fecaca; }
+    .bg-chocobanana{ background: #fed7aa; }
+    .bg-frutachamoy{ background: #fef08a; }
+
+    .num-tag {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .price-tag {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      z-index: 2;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .price-tag.blue { background: #0284c7; }
+    .price-tag.pink { background: #db2777; }
+    .price-tag.orange { background: #ea580c; }
+
+    /* ILUSTRACIONES SVG DE PALETAS REALISTAS */
+    .paleta-svg {
+      width: 100%;
+      height: 100%;
+      max-height: 98px;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.18));
+      transition: transform 0.2s;
+    }
+
+    .paleta-card:hover .paleta-svg {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .paleta-footer {
+      background: white;
+      padding: 4px 4px 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .paleta-name {
+      font-weight: 900;
+      font-size: 0.88rem;
+      color: #1e293b;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: -0.2px;
+    }
+
+    .paleta-sub {
+      font-size: 0.65rem;
+      color: #64748b;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* BARRA INFERIOR DE PALETAS EXTRA (OREO Y NUEZ) */
+    .extra-bars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .extra-card {
+      background: white;
+      border-radius: 14px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .extra-card svg {
+      width: 42px;
+      height: 38px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .extra-name {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #1e293b;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    .extra-price {
+      background: #1e293b;
+      color: white;
+      font-weight: 900;
+      font-size: 0.95rem;
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+
+    /* BARRA INFERIOR DE METODOS DE PAGO / HORARIO */
+    .bottom-info-bar {
+      margin-top: 10px;
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .info-item svg {
+      width: 18px;
+      height: 18px;
+      fill: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="col-1">
+    <div class="brand-header">
+      <svg class="brand-logo-icon" viewBox="0 0 100 120">
+        <path d="M25 15 C25 5, 75 5, 75 15 L75 80 C75 85, 25 85, 25 80 Z" fill="#ec4899" rx="10"/>
+        <path d="M25 15 C25 5, 55 5, 55 15 L55 80 C55 85, 25 85, 25 80 Z" fill="#0284c7" opacity="0.9"/>
+        <rect x="42" y="80" width="16" height="32" rx="6" fill="#f6d5a8"/>
+        <rect x="46" y="84" width="8" height="24" rx="3" fill="#dfb37c"/>
+      </svg>
+      <div class="brand-title">PALETERÍA</div>
+    </div>
+
+    <section class="menu-panel">
+      <div class="panel-header agua">
+        <div class="header-left">
+          <svg class="header-icon" viewBox="0 0 24 30" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="4" y="2" width="16" height="18" rx="7"/>
+            <path d="M12 20v8"/>
+          </svg>
+          PALETAS DE AGUA
+        </div>
+        <div class="header-price-badge">$15</div>
+      </div>
+
+      <div class="grid-2x2">
+        <div class="paleta-card">
+          <div class="paleta-visual bg-picafresa">
+            <span class="num-tag">1</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#d91b24"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#ef233c"/>
+              <circle cx="36" cy="30" r="2.5" fill="#8d0801"/>
+              <circle cx="60" cy="25" r="2.5" fill="#8d0801"/>
+              <circle cx="48" cy="50" r="3" fill="#8d0801"/>
+              <circle cx="34" cy="70" r="2.5" fill="#8d0801"/>
+              <circle cx="65" cy="68" r="3" fill="#8d0801"/>
+              <path d="M40 22 Q48 20 54 26" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+            </svg>
+            <span class="price-tag blue">$15</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Pica Fresa</span>
+            <span class="paleta-sub">Fresa con Chile</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-arroz">
+            <span class="num-tag">2</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#fdfbf7"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#fffdfa"/>
+              <circle cx="35" cy="30" r="1.5" fill="#b07d56"/>
+              <circle cx="62" cy="35" r="1.8" fill="#b07d56"/>
+              <circle cx="45" cy="48" r="1.2" fill="#8d5b38"/>
+              <circle cx="58" cy="65" r="1.5" fill="#b07d56"/>
+              <circle cx="36" cy="72" r="2" fill="#b07d56"/>
+              <ellipse cx="50" cy="78" rx="4" ry="2" fill="#eae4db" transform="rotate(20 50 78)"/>
+              <ellipse cx="40" cy="40" rx="4" ry="2" fill="#eae4db" transform="rotate(-15 40 40)"/>
+              <path d="M38 20 Q48 18 56 24" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+            </svg>
+            <span class="price-tag blue">$15</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Arroz</span>
+            <span class="paleta-sub">Arroz con Canela</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-cacahuate">
+            <span class="num-tag">3</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#d49b6a"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#e2ad7e"/>
+              <line x1="38" y1="20" x2="38" y2="85" stroke="#b57948" stroke-width="3" stroke-linecap="round"/>
+              <line x1="50" y1="20" x2="50" y2="85" stroke="#b57948" stroke-width="3" stroke-linecap="round"/>
+              <line x1="62" y1="20" x2="62" y2="85" stroke="#b57948" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="42" cy="35" rx="3" ry="5" fill="#fae1c5"/>
+              <ellipse cx="58" cy="55" rx="4" ry="3" fill="#fae1c5"/>
+              <ellipse cx="38" cy="70" rx="3" ry="4" fill="#fae1c5"/>
+            </svg>
+            <span class="price-tag blue">$15</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Cacahuate</span>
+            <span class="paleta-sub">Cacahuate Tostado</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-pina">
+            <span class="num-tag">4</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#f6c823"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#ffdc33"/>
+              <line x1="38" y1="20" x2="38" y2="85" stroke="#e0aa14" stroke-width="3" stroke-linecap="round"/>
+              <line x1="50" y1="20" x2="50" y2="85" stroke="#e0aa14" stroke-width="3" stroke-linecap="round"/>
+              <line x1="62" y1="20" x2="62" y2="85" stroke="#e0aa14" stroke-width="3" stroke-linecap="round"/>
+              <path d="M32 30 Q44 26 50 32" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+            </svg>
+            <span class="price-tag blue">$15</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Piña</span>
+            <span class="paleta-sub">Fruta Natural</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-center">
+    <section class="menu-panel">
+      <div class="panel-header leche">
+        <div class="header-left">
+          <svg class="header-icon" viewBox="0 0 24 30" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="4" y="2" width="16" height="18" rx="7"/>
+            <path d="M12 20v8"/>
+          </svg>
+          PALETAS DE LECHE & CREMA
+        </div>
+        <div class="header-price-badge">$20</div>
+      </div>
+
+      <div class="grid-3x2">
+        <div class="paleta-card">
+          <div class="paleta-visual bg-chocoreta">
+            <span class="num-tag">1</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#78d5b3"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#92e4c5"/>
+              <circle cx="36" cy="30" r="3.5" fill="#3e2723"/>
+              <circle cx="62" cy="28" r="3" fill="#2e7d32"/>
+              <circle cx="48" cy="45" r="4" fill="#3e2723"/>
+              <circle cx="34" cy="65" r="3" fill="#2e7d32"/>
+              <circle cx="64" cy="62" r="3.5" fill="#3e2723"/>
+              <circle cx="50" cy="78" r="3" fill="#3e2723"/>
+            </svg>
+            <span class="price-tag pink">$20</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Chocoreta</span>
+            <span class="paleta-sub">Menta con Chispas</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-cajeta">
+            <span class="num-tag">2</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#bd703b"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#cd814b"/>
+              <line x1="38" y1="20" x2="38" y2="85" stroke="#9e5728" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="50" y1="20" x2="50" y2="85" stroke="#9e5728" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="62" y1="20" x2="62" y2="85" stroke="#9e5728" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+            <span class="price-tag pink">$20</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Cajeta</span>
+            <span class="paleta-sub">Dulce de Leche</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-zarzamora">
+            <span class="num-tag">3</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#7b1e4f"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#912860"/>
+              <circle cx="38" cy="28" r="3" fill="#4a0e2e"/>
+              <circle cx="60" cy="34" r="3.5" fill="#4a0e2e"/>
+              <circle cx="46" cy="50" r="3" fill="#4a0e2e"/>
+              <circle cx="62" cy="68" r="3" fill="#4a0e2e"/>
+              <circle cx="36" cy="74" r="3.5" fill="#4a0e2e"/>
+            </svg>
+            <span class="price-tag pink">$20</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Zarzamora</span>
+            <span class="paleta-sub">Con Queso Crema</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-fresacrema">
+            <span class="num-tag">4</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#fff5f5"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#ffffff"/>
+              <path d="M35 25 C30 25, 28 35, 36 42 C44 35, 42 25, 35 25 Z" fill="#e63946"/>
+              <circle cx="36" cy="33" r="1.5" fill="#ffccd5"/>
+              <path d="M58 45 C52 45, 50 55, 59 62 C68 55, 66 45, 58 45 Z" fill="#e63946"/>
+              <circle cx="59" cy="53" r="1.5" fill="#ffccd5"/>
+              <path d="M38 68 C32 68, 30 78, 39 84 C47 78, 45 68, 38 68 Z" fill="#e63946"/>
+            </svg>
+            <span class="price-tag pink">$20</span>
+          </div>
+          <div class="paleta-footer">
+            <span class="paleta-name">Fresas Crema</span>
+            <span class="paleta-sub">Fresas Naturales</span>
+          </div>
+        </div>
+
+        <div class="paleta-card">
+          <div class="paleta-visual bg-pistache">
+            <span class="num-tag">5</span>
+            <svg class="paleta-svg" viewBox="0 0 100 140">
+              <rect x="44" y="90" width="12" height="40" rx="5" fill="#f4cf99" stroke="#d8a467" stroke-width="2"/>
+              <rect x="24" y="10" width="52" height="90" rx="14" fill="#9dc88d"/>
+              <path d="M28 14 C40 10, 60 10, 72 14 L72 90 C60 96, 40 96, 28 90 Z" fill="#b0d9a0"/>
+              <line x1="38" y1="20" x2="38" y2="85" stroke="#7ea66e" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="50" y1="20" x2="50" y2="85" stroke="#7ea66e" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="62" y1="20" x2="62" y2="85" stroke="#7ea66e" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="42" cy="35" r="2.5" fill="#588157"/>
+              <circle cx="58" cy="55" r="2" fill="#7f4
